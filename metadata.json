@@ -1,0 +1,5 @@
+{
+  "name": "SilverOak - Apartment Maintenance",
+  "description": "A production-ready apartment maintenance system featuring role-based dashboards, resident management, billing, and complaint tracking with persistent local storage.",
+  "requestFramePermissions": []
+}

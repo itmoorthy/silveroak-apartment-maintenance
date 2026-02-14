@@ -1,11 +1,27 @@
-<div align="center">
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+# SilverOak - Apartment Maintenance System
 
-  <h1>Built with AI Studio</h2>
+SilverOak is a production-ready web application for apartment associations to manage residents, billing, and maintenance requests.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Key Features
+- **Role-Based Dashboards**: Separate views for Admins and Residents.
+- **Maintenance Billing**: Auto-generate monthly dues and track payments.
+- **Complaint Management**: Report issues, track status, and communicate updates.
+- **Flat Management**: Manage unit inventory and resident assignments.
+- **Persistent Data**: Uses browser LocalStorage to simulate a permanent database.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Tech Stack
+- **Frontend**: React 18+ with TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Data Persistence**: LocalStorage (Persistent across refreshes)
 
-</div>
+## Running Locally
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Access at `http://localhost:5173`
+
+## Demo Credentials
+- **Admin**: `admin@nestcare.com` / `password123`
+- **Resident**: `john@gmail.com` / `password123`
