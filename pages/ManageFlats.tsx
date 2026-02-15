@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../db';
 import { Flat, User, UserRole } from '../types';
-import { Plus, Search, Edit3, Building2, UserCircle2, Trash2, X, Check, Lock, Phone, Mail, User as UserIcon } from 'lucide-react';
+import { Plus, Search, Edit3, Building2, UserCircle2, X, Check, Lock, Phone, Mail, User as UserIcon } from 'lucide-react';
 
 const ManageFlats: React.FC = () => {
   const [flats, setFlats] = useState<Flat[]>([]);
@@ -65,13 +65,6 @@ const ManageFlats: React.FC = () => {
       isOccupied: !!resident 
     });
     setIsModalOpen(true);
-  };
-
-  const handleDelete = (id: string) => {
-    if (window.confirm('Are you sure you want to clear resident info? The resident account will be deleted and this flat will become vacant, but the unit will remain in your list.')) {
-      db.flats.delete(id);
-      refreshData();
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -220,13 +213,6 @@ const ManageFlats: React.FC = () => {
                           title="Edit Flat & Resident"
                         >
                           <Edit3 className="w-5 h-5" />
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(f.id)}
-                          className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
-                          title="Clear Resident Info"
-                        >
-                          <Trash2 className="w-5 h-5" />
                         </button>
                       </div>
                     </td>

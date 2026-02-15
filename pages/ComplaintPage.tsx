@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { db } from '../db';
 import { Complaint, User, UserRole, ComplaintStatus, Flat, NotificationType } from '../types';
-import { MessageSquareWarning, Plus, CheckCircle, Clock, Trash2, Send } from 'lucide-react';
+import { MessageSquareWarning, Plus, CheckCircle, Clock, Send } from 'lucide-react';
 
 interface ComplaintPageProps {
   user: User;
