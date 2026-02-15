@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { User, Notification, UserRole } from '../types';
-import { LogOut, Bell, User as UserIcon } from 'lucide-react';
+import { LogOut, Bell, User as UserIcon, Building2 } from 'lucide-react';
 import { db } from '../db';
 import NotificationDropdown from './NotificationDropdown';
 
@@ -13,18 +12,24 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [unitNumber, setUnitNumber] = useState<string>('');
 
   useEffect(() => {
     const fetchNotifications = () => {
       setNotifications(db.notifications.getAllForUser(user.id));
     };
 
+    if (user.role === UserRole.RESIDENT && user.flatId) {
+      const flat = db.flats.getAll().find(f => f.id === user.flatId);
+      if (flat) setUnitNumber(flat.unitNumber);
+    }
+
     fetchNotifications();
     
     // Set up a simple interval to poll for notifications (simulating real-time)
     const interval = setInterval(fetchNotifications, 5000);
     return () => clearInterval(interval);
-  }, [user.id]);
+  }, [user.id, user.flatId, user.role]);
 
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
@@ -42,9 +47,19 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
     <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
       <div className="flex flex-col">
         <h2 className="text-lg font-bold text-slate-800">Welcome, {user.name}</h2>
-        <span className="text-xs font-medium text-slate-500 uppercase tracking-widest">
-          {user.role === UserRole.ADMIN ? 'Association Manager' : 'Resident Dashboard'}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+            {user.role === UserRole.ADMIN ? 'Association Manager' : 'Resident Dashboard'}
+          </span>
+          {unitNumber && (
+            <>
+              <span className="text-slate-300">•</span>
+              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest flex items-center gap-1">
+                <Building2 className="w-3 h-3" /> Unit {unitNumber}
+              </span>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="flex items-center gap-6">
